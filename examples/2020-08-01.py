@@ -20,7 +20,7 @@ if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
 else:
-    SUITE = ["depot:p01.pddl", "gripper:prob01.pddl", "mystery:prob07.pddl"]
+    SUITE = ["depot:p01.pddl", "gripper:prob01.pddl"]
     ENV = LocalEnvironment(processes=2)
     REPO = os.path.expanduser("~/CLionProjects/fast-downward")
 # Use path to your Fast Downward repository.
@@ -39,10 +39,10 @@ exp.add_parser(exp.SINGLE_SEARCH_PARSER)
 exp.add_parser(exp.PLANNER_PARSER)
 
 exp.add_suite(BENCHMARKS_DIR, SUITE)
-exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), default)"])
-exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), naive)"])
-exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), marked)"])
-exp.add_algorithm("timestamps", REPO, REV, ["--search", "astar(blind(), timestamps)"])
+exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default)"])
+exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive)"])
+exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked)"])
+exp.add_algorithm("timestamps", REPO, REV, ["--search", "astar(blind(), sg = timestamps)"])
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
