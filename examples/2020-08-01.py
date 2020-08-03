@@ -16,7 +16,7 @@ ATTRIBUTES = ["coverage", "error", "expansions", "total_time", "expansions_until
 NODE = platform.node()
 if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
     # Create bigger suites with suites.py from the downward-benchmarks repo.
-    SUITE = ["depot", "freecell", "gripper", "zenotravel"]
+    SUITE = ["gripper:prob01.pddl"]
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
 else:
