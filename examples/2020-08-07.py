@@ -82,7 +82,7 @@ exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="report.html")
 
 # Add scatter plot report step.
 exp.add_report(
-    ScatterPlotReport(attributes=["expansions"], filter_algorithm=["blind", "lmcut"]),
+    ScatterPlotReport(attributes=["expansions"], filter_algorithm=["default", "naive", "marked", "timestamps"]),
     outfile="scatterplot.png",
 )
 
