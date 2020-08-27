@@ -40,9 +40,9 @@ if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
 else:
-    #SUITE = ["depot:p01.pddl", "gripper:prob01.pddl", "depot:p02.pddl", "gripper:prob02.pddl", "gripper:prob02.pddl",
-     #        "zenotravel:p01.pddl", "zenotravel:p02.pddl", "freecell:p01.pddl"]
-    SUITE = ["gripper", "zenotravel"]
+    SUITE = ["depot:p01.pddl", "gripper:prob01.pddl", "depot:p02.pddl", "gripper:prob02.pddl", "gripper:prob02.pddl",
+             "zenotravel:p01.pddl", "zenotravel:p02.pddl", "freecell:p01.pddl"]
+    #SUITE = ["gripper", "zenotravel"]
     ENV = LocalEnvironment(processes=2)
     REPO = os.path.expanduser("~/CLionProjects/fast-downward")
 # Use path to your Fast Downward repository.
@@ -50,7 +50,7 @@ BENCHMARKS_DIR = os.path.expanduser("~/benchmarks")
 # If REVISION_CACHE is None, the default ./data/revision-cache is used.
 REVISION_CACHE = os.environ.get("DOWNWARD_REVISION_CACHE")
 VCS = cached_revision.get_version_control_system(REPO)
-REV = "73a847874f2410d736cdc64df6384fda66a27739"
+REV = "a4ba35a109502fd205da7fc39dced1eb9fe0bcb1"
 
 exp = FastDownwardExperiment(environment=ENV, revision_cache=REVISION_CACHE)
 
