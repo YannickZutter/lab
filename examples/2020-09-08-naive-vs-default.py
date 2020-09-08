@@ -40,8 +40,8 @@ if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
 else:
-    SUITE = ["depot:p01.pddl", "gripper:prob01.pddl", "depot:p02.pddl", "gripper:prob02.pddl", "gripper:prob02.pddl",
-             "zenotravel:p01.pddl", "zenotravel:p02.pddl", "freecell:p01.pddl"]
+    SUITE = ["depot:p01.pddl", "gripper:prob01.pddl", "depot:p02.pddl", "gripper:prob02.pddl", "zenotravel:p01.pddl", "zenotravel:p02.pddl", "freecell:p01.pddl"]
+    #SUITE = ["gripper"]
     ENV = LocalEnvironment(processes=2)
     REPO = os.path.expanduser("~/CLionProjects/fast-downward")
 # Use path to your Fast Downward repository.
@@ -49,7 +49,7 @@ BENCHMARKS_DIR = os.path.expanduser("~/benchmarks")
 # If REVISION_CACHE is None, the default ./data/revision-cache is used.
 REVISION_CACHE = os.environ.get("DOWNWARD_REVISION_CACHE")
 VCS = cached_revision.get_version_control_system(REPO)
-REV = "1af27ae08b13298e1048e72f0e135bda67c9b579"
+REV = "7f961b6400a36f7750e6113578dabd94df50f6ef"
 
 exp = FastDownwardExperiment(environment=ENV, revision_cache=REVISION_CACHE)
 
@@ -61,10 +61,8 @@ exp.add_parser(exp.PLANNER_PARSER)
 exp.add_parser("sg-parser.py")
 
 exp.add_suite(BENCHMARKS_DIR, SUITE)
-exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default)"])
-exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive)"])
-exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked)"])
-exp.add_algorithm("timestamps", REPO, REV, ["--search", "astar(blind(), sg = timestamps)"])
+exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default, iteration_limit=100000)"])
+exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive, iteration_limit=100000)"])
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
@@ -81,8 +79,8 @@ exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="report.html")
 
 # Add scatter plot report step.
 exp.add_report(
-    ScatterPlotReport(attributes=["expansions"], filter_algorithm=["default", "naive", "marked", "timestamps"]),
-    outfile="scatterplot.png",
+    ScatterPlotReport(attributes=["tot_dur_gao"], filter_algorithm=["default", "naive"], scale="linear"),
+    outfile="scatterplot.png"
 )
 
 # Parse the commandline and show or run experiment steps.
