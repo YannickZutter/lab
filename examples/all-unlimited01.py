@@ -26,16 +26,7 @@ if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
          'maintenance-opt14-adl', 'miconic', 'miconic-fulladl', 'miconic-simpleadl', 'movie', 'mprime', 'mystery',
          'nomystery-opt11-strips', 'nurikabe-opt18-adl', 'openstacks', 'openstacks-opt08-adl',
          'openstacks-opt08-strips', 'openstacks-opt11-strips', 'openstacks-opt14-strips', 'optical-telegraphs',
-         'organic-synthesis-opt18-strips', 'organic-synthesis-split-opt18-strips', 'parcprinter-08-strips',
-         'parcprinter-opt11-strips', 'parking-opt11-strips', 'parking-opt14-strips', 'pathways',
-         'pegsol-08-strips', 'pegsol-opt11-strips', 'petri-net-alignment-opt18-strips', 'philosophers',
-         'pipesworld-notankage', 'pipesworld-tankage', 'psr-large', 'psr-middle', 'psr-small', 'rovers',
-         'satellite', 'scanalyzer-08-strips', 'scanalyzer-opt11-strips', 'schedule', 'settlers-opt18-adl',
-         'snake-opt18-strips', 'sokoban-opt08-strips', 'sokoban-opt11-strips', 'spider-opt18-strips', 'storage',
-         'termes-opt18-strips', 'tetris-opt14-strips', 'tidybot-opt11-strips', 'tidybot-opt14-strips', 'tpp',
-         'transport-opt08-strips', 'transport-opt11-strips', 'transport-opt14-strips', 'trucks',
-         'visitall-opt11-strips', 'visitall-opt14-strips', 'woodworking-opt08-strips', 'woodworking-opt11-strips',
-         'zenotravel']
+         ]
 
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
