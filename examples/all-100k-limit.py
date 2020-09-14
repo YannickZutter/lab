@@ -58,11 +58,11 @@ exp.add_parser(exp.PLANNER_PARSER)
 exp.add_parser("sg-parser.py")
 
 exp.add_suite(BENCHMARKS_DIR, SUITE)
-exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default)"])
-exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive)"])
-exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked)"])
-exp.add_algorithm("timestamps", REPO, REV, ["--search", "astar(blind(), sg = timestamps)"])
-exp.add_algorithm("psvn", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
+exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default, iteration_limit=100000)"])
+exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive, iteration_limit=100000)"])
+exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked, iteration_limit=100000)"])
+exp.add_algorithm("timestamps", REPO, REV, ["--search", "astar(blind(), sg = timestamps, iteration_limit=100000)"])
+exp.add_algorithm("psvn", REPO, REV, ["--search", "astar(blind(), sg = psvn, iteration_limit=100000)"])
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
