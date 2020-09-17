@@ -19,14 +19,6 @@ NODE = platform.node()
 if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
     # Create bigger suites with suites.py from the downward-benchmarks repo.
     SUITE = ['agricola-opt18-strips', 'airport', 'assembly', 'barman-opt11-strips', 'barman-opt14-strips', 'blocks',
-             #'caldera-opt18-adl', 'caldera-split-opt18-adl', 'cavediving-14-adl', 'childsnack-opt14-strips',
-             #'citycar-opt14-adl', 'data-network-opt18-strips', 'depot', 'driverlog', 'elevators-opt08-strips',
-             #'elevators-opt11-strips', 'floortile-opt11-strips', 'floortile-opt14-strips', 'freecell',
-             #'ged-opt14-strips', 'grid', 'gripper', 'hiking-opt14-strips', 'logistics00', 'logistics98',
-             #'maintenance-opt14-adl', 'miconic', 'miconic-fulladl', 'miconic-simpleadl', 'movie', 'mprime', 'mystery',
-             #'nomystery-opt11-strips', 'nurikabe-opt18-adl', 'openstacks', 'openstacks-opt08-adl',
-             #'openstacks-opt08-strips', 'openstacks-opt11-strips', 'openstacks-opt14-strips', 'optical-telegraphs',
-             #'organic-synthesis-opt18-strips', 'organic-synthesis-split-opt18-strips', 'parcprinter-08-strips',
              'parcprinter-opt11-strips', 'parking-opt11-strips', 'parking-opt14-strips', 'pathways',
              'pegsol-08-strips', 'pegsol-opt11-strips', 'petri-net-alignment-opt18-strips', 'philosophers',
              'pipesworld-notankage', 'pipesworld-tankage', 'psr-large', 'psr-middle', 'psr-small', 'rovers',
@@ -40,9 +32,7 @@ if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
 else:
-    #SUITE = ["depot:p01.pddl", "gripper:prob01.pddl", "depot:p02.pddl", "gripper:prob02.pddl", "gripper:prob02.pddl",
-     #        "zenotravel:p01.pddl", "zenotravel:p02.pddl", "freecell:p01.pddl"]
-    SUITE = ["gripper", "zenotravel"]
+    SUITE = ["gripper"]
     ENV = LocalEnvironment(processes=2)
     REPO = os.path.expanduser("~/CLionProjects/fast-downward")
 # Use path to your Fast Downward repository.

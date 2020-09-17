@@ -12,7 +12,7 @@ from lab.environments import BaselSlurmEnvironment, LocalEnvironment
 
 
 ATTRIBUTES = ["coverage", "error", "expansions", "total_time", "expansions_until_last_jump", "search_time",  "cost",
-              "run_dir", "avg_dur_gao", "num_gao", "tot_dur_gao", "sg_intitialization_time"]
+              "run_dir", "avg_dur_gao", "num_gao", "tot_dur_gao", "sg_intitialization_time", "exp_limit"]
 
 
 NODE = platform.node()

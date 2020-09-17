@@ -12,7 +12,7 @@ from lab.environments import BaselSlurmEnvironment, LocalEnvironment
 
 
 ATTRIBUTES = ["coverage", "error", "expansions", "total_time", "expansions_until_last_jump", "search_time",  "cost",
-              "run_dir", "avg_dur_gao", "num_gao", "tot_dur_gao", "sg_intitialization_time"]
+              "run_dir", "avg_dur_gao", "num_gao", "tot_dur_gao", "sg_intitialization_time", "exp_limit"]
 
 
 NODE = platform.node()
@@ -61,8 +61,8 @@ exp.add_parser(exp.PLANNER_PARSER)
 exp.add_parser("sg-parser.py")
 
 exp.add_suite(BENCHMARKS_DIR, SUITE)
-exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default, iteration_limit=100000)"])
-exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive, iteration_limit=100000)"])
+exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default, expansion_limit=100000)"])
+exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive, expansion_limit=100000)"])
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
