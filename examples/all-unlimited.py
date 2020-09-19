@@ -22,11 +22,16 @@ if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
          'caldera-opt18-adl', 'caldera-split-opt18-adl', 'cavediving-14-adl', 'childsnack-opt14-strips',
          'citycar-opt14-adl', 'data-network-opt18-strips', 'depot', 'driverlog', 'elevators-opt08-strips',
          'elevators-opt11-strips', 'floortile-opt11-strips', 'floortile-opt14-strips', 'freecell',
-         'ged-opt14-strips', 'grid', 'gripper', 'hiking-opt14-strips', 'logistics00', 'logistics98',
-         'maintenance-opt14-adl', 'miconic', 'miconic-fulladl', 'miconic-simpleadl', 'movie', 'mprime', 'mystery',
-         'nomystery-opt11-strips', 'nurikabe-opt18-adl', 'openstacks', 'openstacks-opt08-adl',
-         'openstacks-opt08-strips', 'openstacks-opt11-strips', 'openstacks-opt14-strips', 'optical-telegraphs',
-         ]
+         'organic-synthesis-opt18-strips', 'organic-synthesis-split-opt18-strips', 'parcprinter-08-strips',
+         'parcprinter-opt11-strips', 'parking-opt11-strips', 'parking-opt14-strips', 'pathways',
+         'pegsol-08-strips', 'pegsol-opt11-strips', 'petri-net-alignment-opt18-strips', 'philosophers',
+         'pipesworld-notankage', 'pipesworld-tankage', 'psr-large', 'psr-middle', 'psr-small', 'rovers',
+         'satellite', 'scanalyzer-08-strips', 'scanalyzer-opt11-strips', 'schedule', 'settlers-opt18-adl',
+         'snake-opt18-strips', 'sokoban-opt08-strips', 'sokoban-opt11-strips', 'spider-opt18-strips', 'storage',
+         'termes-opt18-strips', 'tetris-opt14-strips', 'tidybot-opt11-strips', 'tidybot-opt14-strips', 'tpp',
+         'transport-opt08-strips', 'transport-opt11-strips', 'transport-opt14-strips', 'trucks',
+         'visitall-opt11-strips', 'visitall-opt14-strips', 'woodworking-opt08-strips', 'woodworking-opt11-strips',
+         'zenotravel']
 
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
@@ -41,7 +46,7 @@ BENCHMARKS_DIR = os.path.expanduser("~/benchmarks")
 # If REVISION_CACHE is None, the default ./data/revision-cache is used.
 REVISION_CACHE = os.environ.get("DOWNWARD_REVISION_CACHE")
 VCS = cached_revision.get_version_control_system(REPO)
-REV = "7f961b6400a36f7750e6113578dabd94df50f6ef"
+REV = "f055dab609becd40b31cd74c53f3ac0599a8beb9"
 
 exp = FastDownwardExperiment(environment=ENV, revision_cache=REVISION_CACHE)
 
@@ -58,6 +63,8 @@ exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive)"]
 exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked)"])
 exp.add_algorithm("timestamps", REPO, REV, ["--search", "astar(blind(), sg = timestamps)"])
 exp.add_algorithm("psvn", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
+exp.add_algorithm("psvn_split", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
+exp.add_algorithm("watched", REPO, REV, ["--search", "astar(blind(), sg = watched)"])
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
@@ -71,6 +78,11 @@ exp.add_fetcher(name="fetch")
 
 # Add report step (AbsoluteReport is the standard report).
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="report.html")
+exp.add_report(AbsoluteReport(attributes=ATTRIBUTES, format="tex"), outfile="report.tex")
+
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "psvn"]), outfile="plot_searchtime_default_vs_psvn")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "psvn"]), outfile="plot_inittime_default_vs_psvn")
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "psvn_split"]), outfile="plot_inittime_default_vs_split")
 
 # Parse the commandline and show or run experiment steps.
 exp.run_steps()
