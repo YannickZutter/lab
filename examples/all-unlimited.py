@@ -63,7 +63,7 @@ exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive)"]
 exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked)"])
 exp.add_algorithm("timestamps", REPO, REV, ["--search", "astar(blind(), sg = timestamps)"])
 exp.add_algorithm("psvn", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
-exp.add_algorithm("psvn_split", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
+exp.add_algorithm("psvn_split", REPO, REV, ["--search", "astar(blind(), sg = psvn_split)"])
 exp.add_algorithm("watched", REPO, REV, ["--search", "astar(blind(), sg = watched)"])
 
 # Add step that writes experiment files to disk.
