@@ -18,7 +18,6 @@ ATTRIBUTES = ["coverage", "error", "expansions", "total_time", "expansions_until
 NODE = platform.node()
 if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
     # Create bigger suites with suites.py from the downward-benchmarks repo.
-
     SUITE = ['agricola-opt18-strips', 'airport', 'barman-opt11-strips', 'barman-opt14-strips', 'blocks',
              'childsnack-opt14-strips', 'data-network-opt18-strips', 'depot', 'driverlog', 'elevators-opt08-strips',
              'elevators-opt11-strips', 'floortile-opt11-strips', 'floortile-opt14-strips', 'freecell',
@@ -35,22 +34,10 @@ if NODE.endswith(".scicore.unibas.ch") or NODE.endswith(".cluster.bc2.ch"):
              'visitall-opt11-strips', 'visitall-opt14-strips', 'woodworking-opt08-strips', 'woodworking-opt11-strips',
              'zenotravel']
 
-#    SUITE = [
-#         'agricola-opt18-strips', 'airport', 'assembly', 'barman-opt11-strips', 'barman-opt14-strips', 'blocks',
-#         'caldera-opt18-adl', 'caldera-split-opt18-adl', 'cavediving-14-adl', 'childsnack-opt14-strips',
-#         'citycar-opt14-adl', 'data-network-opt18-strips', 'depot', 'driverlog', 'elevators-opt08-strips',
-#         'elevators-opt11-strips', 'floortile-opt11-strips', 'floortile-opt14-strips', 'freecell',
-         #'ged-opt14-strips', 'grid', 'gripper', 'hiking-opt14-strips', 'logistics00', 'logistics98',
-         #'maintenance-opt14-adl', 'miconic', 'miconic-fulladl', 'miconic-simpleadl', 'movie', 'mprime', 'mystery',
-         #'nomystery-opt11-strips', 'nurikabe-opt18-adl', 'openstacks', 'openstacks-opt08-adl',
-         #'openstacks-opt08-strips', 'openstacks-opt11-strips', 'openstacks-opt14-strips', 'optical-telegraphs',
-#         ]
-
     ENV = BaselSlurmEnvironment(email="yannick.zutter@stud.unibas.ch")
     REPO = os.path.expanduser("~/fast-downward")
 else:
-    #SUITE = ["depot:p01.pddl", "gripper:prob01.pddl", "depot:p02.pddl", "gripper:prob02.pddl", "gripper:prob02.pddl",
-    #         "zenotravel:p01.pddl", "zenotravel:p02.pddl", "freecell:p01.pddl"]
+
     SUITE = ["gripper", "zenotravel"]
     ENV = LocalEnvironment(processes=2)
     REPO = os.path.expanduser("~/CLionProjects/fast-downward")
@@ -59,7 +46,7 @@ BENCHMARKS_DIR = os.path.expanduser("~/benchmarks")
 # If REVISION_CACHE is None, the default ./data/revision-cache is used.
 REVISION_CACHE = os.environ.get("DOWNWARD_REVISION_CACHE")
 VCS = cached_revision.get_version_control_system(REPO)
-REV = "3739cd109ede2baec39e1fd05f181f7717cb0986"
+REV = "c3549f16d8e956c429643578d03a41822f11e87f"
 
 exp = FastDownwardExperiment(environment=ENV, revision_cache=REVISION_CACHE)
 
@@ -71,10 +58,10 @@ exp.add_parser(exp.PLANNER_PARSER)
 exp.add_parser("sg-parser.py")
 
 exp.add_suite(BENCHMARKS_DIR, SUITE)
-exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default)"])
-exp.add_algorithm("psvn", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
-exp.add_algorithm("psvn_split", REPO, REV, ["--search", "astar(blind(), sg = psvn_split)"])
-exp.add_algorithm("watched", REPO, REV, ["--search", "astar(blind(), sg = watched)"])
+exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default, expansion_limit=10000)"])
+exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive, expansion_limit=10000)"])
+exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked, expansion_limit=10000)"])
+exp.add_algorithm("watched", REPO, REV, ["--search", "astar(blind(), sg = watched, expansion_limit=10000)"])
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
@@ -88,6 +75,7 @@ exp.add_fetcher(name="fetch")
 
 # Add report step (AbsoluteReport is the standard report).
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="report.html")
+exp.add_report(AbsoluteReport(attributes=ATTRIBUTES, format="tex"), outfile="report.tex")
 
 # Parse the commandline and show or run experiment steps.
 exp.run_steps()
