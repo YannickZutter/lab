@@ -81,9 +81,9 @@ exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["
 exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "marked"]), outfile="search_time_marked.png")
 exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "watched"]), outfile="search_time_watched.png")
 
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "naive"]), outfile="search_time_naive.png")
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "marked"]), outfile="search_time_marked.png")
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "watched"]), outfile="search_time_watched.png")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "naive"]), outfile="init_time_naive.png")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "marked"]), outfile="init_time_marked.png")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "watched"]), outfile="init_time_watched.png")
 
 # Parse the commandline and show or run experiment steps.
 exp.run_steps()
