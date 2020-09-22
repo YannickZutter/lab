@@ -74,8 +74,8 @@ exp.add_step("start", exp.start_runs)
 exp.add_fetcher(name="fetch")
 
 # Add report step (AbsoluteReport is the standard report).
-exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="report.html")
-exp.add_report(AbsoluteReport(attributes=ATTRIBUTES, format="tex"), outfile="report.tex")
+exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="html_report.html")
+exp.add_report(AbsoluteReport(attributes=ATTRIBUTES, format="tex"), outfile="tex_report.tex")
 
 # Parse the commandline and show or run experiment steps.
 exp.run_steps()
