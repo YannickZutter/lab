@@ -77,5 +77,13 @@ exp.add_fetcher(name="fetch")
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="html_report.html")
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES, format="tex"), outfile="tex_report.tex")
 
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "naive"]), outfile="search_time_naive.png")
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "marked"]), outfile="search_time_marked.png")
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "watched"]), outfile="search_time_watched.png")
+
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "naive"]), outfile="search_time_naive.png")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "marked"]), outfile="search_time_marked.png")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "watched"]), outfile="search_time_watched.png")
+
 # Parse the commandline and show or run experiment steps.
 exp.run_steps()

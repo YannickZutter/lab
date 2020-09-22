@@ -58,10 +58,9 @@ exp.add_parser(exp.PLANNER_PARSER)
 exp.add_parser("sg-parser.py")
 
 exp.add_suite(BENCHMARKS_DIR, SUITE)
-exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default, expansion_limit=10000)"])
-exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive, expansion_limit=10000)"])
-exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked, expansion_limit=10000)"])
-exp.add_algorithm("watched", REPO, REV, ["--search", "astar(blind(), sg = watched, expansion_limit=10000)"])
+exp.add_algorithm("psvn", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
+exp.add_algorithm("split", REPO, REV, ["--search", "astar(blind(), sg = psvn_split)"])
+
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
@@ -77,13 +76,8 @@ exp.add_fetcher(name="fetch")
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="html_report.html")
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES, format="tex"), outfile="tex_report.tex")
 
-exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "naive"]), outfile="search_time_naive.png")
-exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "marked"]), outfile="search_time_marked.png")
-exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "watched"]), outfile="search_time_watched.png")
-
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "naive"]), outfile="search_time_naive.png")
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "marked"]), outfile="search_time_marked.png")
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "watched"]), outfile="search_time_watched.png")
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["psvn", "split"]), outfile="search_time.png")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["psvn", "split"]), outfile="init_time.png")
 
 # Parse the commandline and show or run experiment steps.
 exp.run_steps()
