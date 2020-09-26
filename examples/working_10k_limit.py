@@ -77,13 +77,13 @@ exp.add_fetcher(name="fetch")
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES), outfile="html_report.html")
 exp.add_report(AbsoluteReport(attributes=ATTRIBUTES, format="tex"), outfile="tex_report.tex")
 
-exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "naive"], format="tex"), outfile="search_time_naive_naive.png")
-exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "marked"], format="tex"), outfile="search_time_marked_marked.png")
-exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "watched"], format="tex"), outfile="search_time_watched_watched.png")
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "naive"], format="tex"), outfile="search_time_naive_naive.tex")
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "marked"], format="tex"), outfile="search_time_marked_marked.tex")
+exp.add_report(ScatterPlotReport(attributes=["search_time"], filter_algorithm=["default", "watched"], format="tex"), outfile="search_time_watched_watched.tex")
 
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "naive"], format="tex"), outfile="search_time_naive.png")
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "marked"], format="tex"), outfile="search_time_marked.png")
-exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "watched"], format="tex"), outfile="search_time_watched.png")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "naive"], format="tex"), outfile="search_time_naive.tex")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "marked"], format="tex"), outfile="search_time_marked.tex")
+exp.add_report(ScatterPlotReport(attributes=["sg_intitialization_time"], filter_algorithm=["default", "watched"], format="tex"), outfile="search_time_watched.tex")
 
 # Parse the commandline and show or run experiment steps.
 exp.run_steps()
