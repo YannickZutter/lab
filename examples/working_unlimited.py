@@ -46,7 +46,7 @@ BENCHMARKS_DIR = os.path.expanduser("~/benchmarks")
 # If REVISION_CACHE is None, the default ./data/revision-cache is used.
 REVISION_CACHE = os.environ.get("DOWNWARD_REVISION_CACHE")
 VCS = cached_revision.get_version_control_system(REPO)
-REV = "3739cd109ede2baec39e1fd05f181f7717cb0986"
+REV = "de5f9c77c8ed0dee2231c874be5afc2a76f3c18e"
 
 exp = FastDownwardExperiment(environment=ENV, revision_cache=REVISION_CACHE)
 
@@ -59,9 +59,11 @@ exp.add_parser("sg-parser.py")
 
 exp.add_suite(BENCHMARKS_DIR, SUITE)
 exp.add_algorithm("default", REPO, REV, ["--search", "astar(blind(), sg = default)"])
-exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive)"])
+exp.add_algorithm("psvn", REPO, REV, ["--search", "astar(blind(), sg = psvn)"])
+exp.add_algorithm("psvn_split", REPO, REV, ["--search", "astar(blind(), sg = psvn_split)"])
 exp.add_algorithm("marked", REPO, REV, ["--search", "astar(blind(), sg = marked)"])
 exp.add_algorithm("watched", REPO, REV, ["--search", "astar(blind(), sg = watched)"])
+exp.add_algorithm("naive", REPO, REV, ["--search", "astar(blind(), sg = naive)"])
 
 # Add step that writes experiment files to disk.
 exp.add_step("build", exp.build)
